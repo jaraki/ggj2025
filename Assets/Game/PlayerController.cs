@@ -2,8 +2,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerController : MonoBehaviour
-{
+public class PlayerController : MonoBehaviour {
     PlayerInput input;
     Rigidbody rigid;
     public Transform cam;
@@ -18,36 +17,38 @@ public class PlayerController : MonoBehaviour
     float timeSinceTryJump = 100.0f;
 
     Collider col;
-
     readonly RaycastHit[] hits = new RaycastHit[16];
 
     InputAction moveAction;
     InputAction lookAction;
     InputAction jumpAction;
+    InputAction fireAction;
 
     float pitch = 0.0f;
+
+    public GameObject bubblePrefab;
+    public Transform bubbleLaunch;
 
     void Awake() {
         Application.targetFrameRate = 60;
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
+    void Start() {
         rigid = GetComponent<Rigidbody>();
         col = GetComponentInChildren<Collider>();
 
         moveAction = InputSystem.actions.FindAction("Move");
         lookAction = InputSystem.actions.FindAction("Look");
         jumpAction = InputSystem.actions.FindAction("Jump");
+        fireAction = InputSystem.actions.FindAction("Attack");
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update() {
         timeSinceJump += Time.deltaTime;
         timeSinceTryJump += Time.deltaTime;
         jumpCooldown -= Time.deltaTime;
@@ -105,6 +106,12 @@ public class PlayerController : MonoBehaviour
         }
 
         rigid.linearVelocity = move;
+
+
+        if (fireAction.triggered) {
+            GameObject go = Instantiate(bubblePrefab, bubbleLaunch.position, Quaternion.identity);
+            go.GetComponent<Rigidbody>().linearVelocity = bubbleLaunch.forward * 5.0f;
+        }
     }
 
     private void OnApplicationFocus(bool focus) {

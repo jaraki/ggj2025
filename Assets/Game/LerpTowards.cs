@@ -13,6 +13,7 @@ public class LerpTowards : MonoBehaviour {
     void LateUpdate() {
         //float t = 1.0f - Mathf.Pow(0.001f, Time.deltaTime);
         float t = 1.0f - Mathf.Exp(-lambda * Time.deltaTime);
+        //t = Time.deltaTime * lambda;
         transform.position = Vector3.Lerp(transform.position, target.position, t);
         transform.rotation = Quaternion.Slerp(transform.rotation, target.rotation, t);
     }

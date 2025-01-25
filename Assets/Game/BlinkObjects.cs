@@ -9,8 +9,11 @@ public class BlinkObjects : MonoBehaviour {
         StartCoroutine(StartCoroutineExample()); // Start the coroutine when the game object starts
     }
     IEnumerator StartCoroutineExample() {
-        yield return new WaitForSeconds(1f);
-        toBlink.SetActive(!toBlink.activeSelf);
+        toBlink.SetActive(true);
+        yield return new WaitForSeconds(2f);
+        toBlink.SetActive(false);
+        yield return new WaitForSeconds(0.5f);
+
         StartCoroutine(StartCoroutineExample());
     }
 

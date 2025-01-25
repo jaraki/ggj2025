@@ -158,10 +158,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab99b626cf15108429f8c374152e1bec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cam: {fileID: 0}
+  cam: {fileID: 6504701078835908733}
   lookSensitivity: 0.25
-  gunTarget: {fileID: 0}
-  gunActual: {fileID: 0}
   moveSpeed: 3
   jumpSpeed: 5
 --- !u!114 &7619290111159358101
