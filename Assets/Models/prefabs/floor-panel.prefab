@@ -60,6 +60,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 27ae891db4aa5664f9f20bea17abef50, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: b5530e8e10ee3ae4293cd82ff51251f2, type: 2}
     - target: {fileID: 919132149155446097, guid: 27ae891db4aa5664f9f20bea17abef50, type: 3}
       propertyPath: m_Name
       value: floor-panel

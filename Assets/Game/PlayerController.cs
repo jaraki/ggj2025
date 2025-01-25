@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -6,12 +7,12 @@ public class PlayerController : MonoBehaviour
     PlayerInput input;
     Rigidbody rigid;
     public Transform cam;
-    float lookSensitivity = 0.25f;
+    public float lookSensitivity = 0.25f;
 
     public const float MAX_STEEP = 50.0f;
     public const float TRY_JUMP_LENIENCE = 0.2f;
-    float moveSpeed = 5.0f;
-    float jumpSpeed = 5.0f;
+    public float moveSpeed = 3.0f;
+    public float jumpSpeed = 5.0f;
     float jumpCooldown = 0.0f;
     float timeSinceJump = 100.0f;
     float timeSinceTryJump = 100.0f;
@@ -25,6 +26,10 @@ public class PlayerController : MonoBehaviour
     InputAction jumpAction;
 
     float pitch = 0.0f;
+
+    void Awake() {
+        Application.targetFrameRate = 60;
+    }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -43,7 +48,6 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         timeSinceJump += Time.deltaTime;
         timeSinceTryJump += Time.deltaTime;
         jumpCooldown -= Time.deltaTime;
