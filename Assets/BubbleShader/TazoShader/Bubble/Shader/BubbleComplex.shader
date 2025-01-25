@@ -105,7 +105,7 @@ Shader "Tazo/BubbleComplex"
 				o.cap.w = v.color.a;
 
 				float4 move = float4(_deformX, _deformY,0,0);
-				float n = tex2Dlod(_BaseTex3, o.cap + move* _Time.y).r;
+				float n = tex2Dlod(_BaseTex3, o.cap + move* _Time.x).r;
  				o.pos = UnityObjectToClipPos(v.vertex + v.normal * _deform_strength * n);
 				
 				o.uv = TRANSFORM_TEX(v.texcoord, _BaseTex3);

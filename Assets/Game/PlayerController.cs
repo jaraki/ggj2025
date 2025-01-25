@@ -15,6 +15,8 @@ public class PlayerController : MonoBehaviour {
     float jumpCooldown = 0.0f;
     float timeSinceJump = 100.0f;
     float timeSinceTryJump = 100.0f;
+    float timeSinceGun = 100.0f;
+    public float gunCooldown = 0.1f;
 
     Collider col;
     readonly RaycastHit[] hits = new RaycastHit[16];
@@ -51,6 +53,7 @@ public class PlayerController : MonoBehaviour {
     void Update() {
         timeSinceJump += Time.deltaTime;
         timeSinceTryJump += Time.deltaTime;
+        timeSinceGun += Time.deltaTime;
         jumpCooldown -= Time.deltaTime;
 
         Vector2 moveValue = moveAction.ReadValue<Vector2>();
@@ -108,9 +111,12 @@ public class PlayerController : MonoBehaviour {
         rigid.linearVelocity = move;
 
 
-        if (fireAction.triggered) {
+        if (fireAction.IsPressed() && timeSinceGun > gunCooldown) {
+            timeSinceGun = 0.0f;
             GameObject go = Instantiate(bubblePrefab, bubbleLaunch.position, Quaternion.identity);
             go.GetComponent<Rigidbody>().linearVelocity = bubbleLaunch.forward * 5.0f;
+            go.transform.rotation = Quaternion.Euler(Random.value, Random.value, Random.value);
+            go.transform.localScale = Vector3.one * Random.Range(0.5f, 1.0f);
         }
     }
 
