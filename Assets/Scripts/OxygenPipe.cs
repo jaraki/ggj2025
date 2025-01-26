@@ -8,7 +8,7 @@ public class OxygenPipe : MonoBehaviour {
 
     private void OnTriggerStay(Collider other) {
         if (other.CompareTag("Player")) {
-            Game.Instance.Oxygen += Time.deltaTime * 20.0f;
+            Game.Instance.Oxygen += Time.deltaTime * 35.0f;
         }
     }
 }

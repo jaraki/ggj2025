@@ -42,7 +42,9 @@ public class PlayerController : MonoBehaviour {
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start() {
-        StartCoroutine(Music.Instance.FadeOutMusic(Music.Instance.IntroLoop, 3.0f, 0.2f));
+        if (Music.Instance != null) {
+            StartCoroutine(Music.Instance.FadeOutMusic(Music.Instance.IntroLoop, 3.0f, 0.2f));
+        }
 
         rigid = GetComponent<Rigidbody>();
         col = GetComponentInChildren<Collider>();
@@ -149,7 +151,7 @@ public class PlayerController : MonoBehaviour {
 
             AudioManager.Instance.PlaySound(bubbleLaunch.position, AudioManager.Instance.bubble2, 1.0f, Random.Range(0.8f, 1.2f));
 
-            Game.Instance.Power -= 2.0f;
+            //Game.Instance.Power -= 2.0f;
             Game.Instance.Oxygen -= 2.0f;
         }
     }
