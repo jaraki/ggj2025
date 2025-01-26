@@ -41,6 +41,7 @@ public class Bubble : MonoBehaviour {
         Destroy(gameObject, 1.0f);
         ps.Play();
         rend.enabled = false;
+        Destroy(rb);
         die = true;
     }
 }
