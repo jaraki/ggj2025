@@ -74,11 +74,12 @@ public class Game : MonoBehaviour {
             Light.SetActive(false);
         }
         if (Input.GetKeyDown(KeyCode.Escape)) {
-            Menu.SetActive(!Menu.activeSelf);
             if (Menu.activeSelf) {
-                Cursor.lockState = CursorLockMode.None;
+                CloseMenu();
             } else {
-                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.lockState = CursorLockMode.None;
+                Menu.SetActive(true);
+                Time.timeScale = 0f;
             }
         }
     }
@@ -86,5 +87,6 @@ public class Game : MonoBehaviour {
     public void CloseMenu() {
         Menu.SetActive(false);
         Cursor.lockState = CursorLockMode.Locked;
+        Time.timeScale = 1.0f;
     }
 }

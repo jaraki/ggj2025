@@ -210,6 +210,7 @@ GameObject:
   - component: {fileID: 648381871}
   - component: {fileID: 648381870}
   - component: {fileID: 648381869}
+  - component: {fileID: 648381873}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -301,6 +302,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &648381873
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 648381868}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eedf03a0b66f2674ca6bc448fe0a6a30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Animation: {fileID: 918321547}
 --- !u!1 &745977498
 GameObject:
   m_ObjectHideFlags: 0
@@ -433,6 +447,7 @@ GameObject:
   - component: {fileID: 918321544}
   - component: {fileID: 918321546}
   - component: {fileID: 918321545}
+  - component: {fileID: 918321547}
   m_Layer: 5
   m_Name: Credits
   m_TagString: Untagged
@@ -454,7 +469,7 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 648381872}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.05, y: -1}
+  m_AnchorMin: {x: 0.05, y: 0}
   m_AnchorMax: {x: 0.95, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
@@ -606,6 +621,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 918321543}
   m_CullTransparentMesh: 1
+--- !u!111 &918321547
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 918321543}
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Animation: {fileID: 7400000, guid: e9e02c2f668402c45bb228aa67c9f96c, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: e9e02c2f668402c45bb228aa67c9f96c, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_UpdateMode: 0
+  m_CullingType: 0
 --- !u!1 &1186139958
 GameObject:
   m_ObjectHideFlags: 0
