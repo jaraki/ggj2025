@@ -59,6 +59,7 @@ public class Monster : MonoBehaviour {
                 Game.Instance.Oxygen -= isZombie ? 25.0f : 5.0f;
                 Game.Instance.timeSinceHurt = 0.0f;
                 Instantiate(Glitch, collision.transform);
+                AudioManager.Instance.PlaySound(collision.transform.position, AudioManager.Instance.playerHurt, 0.3f, Random.Range(0.9f, 1.1f));
             }
         }
     }

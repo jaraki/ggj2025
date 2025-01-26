@@ -2,13 +2,16 @@ using UnityEngine;
 
 public class OxygenPipe : MonoBehaviour {
 
-    private void OnCollisionStay(Collision collision) {
-
-    }
+    float timer = 0.0f;
 
     private void OnTriggerStay(Collider other) {
         if (other.CompareTag("Player")) {
-            Game.Instance.Oxygen += Time.deltaTime * 35.0f;
+            Game.Instance.Oxygen += Time.deltaTime * 25.0f;
+            timer -= Time.deltaTime;
+            if (timer < 0.0f && Game.Instance.Oxygen < 99.0f) {
+                AudioManager.Instance.PlaySound(transform.position, AudioManager.Instance.bubble1, 0.2f, Game.Instance.Oxygen / 100.0f);
+                timer = 0.05f;
+            }
         }
     }
 }

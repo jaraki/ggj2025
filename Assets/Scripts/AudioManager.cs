@@ -16,6 +16,8 @@ public class AudioManager : MonoBehaviour {
     public AudioClip bubble1;
     public AudioClip bubble2;
 
+    public AudioClip playerHurt;
+
     void Awake() {
         Instance = this;
         for (int i = 0; i < 32; ++i) {
