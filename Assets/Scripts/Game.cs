@@ -9,7 +9,9 @@ public class Game : MonoBehaviour {
     float power;
     public float Power {
         get { return power; }
-        set { power = Mathf.Clamp(value, 0, 100); }
+        set { power = Mathf.Clamp(value, 0, 100);
+            PowerText.text = $"{(int)value}%";
+        }
     }
 
     float oxygen;
@@ -18,6 +20,7 @@ public class Game : MonoBehaviour {
         set {
             if (timeSinceHurt > 2.0f) {
                 oxygen = Mathf.Clamp(value, 0, 100);
+                OxygenText.text = $"Oxygen Level: {(int)value}%";
             }
         }
     }
@@ -35,10 +38,14 @@ public class Game : MonoBehaviour {
     public GameObject HUD;
     public GameObject Light;
     public GameObject Menu;
+    public GameObject WinScreen;
+    public GameObject DeathScreen;
     public RectTransform OxygenBar;
     public RectTransform PowerBar;
     public Image FadeOut;
     public TextMeshProUGUI BubblitisText;
+    public TextMeshProUGUI PowerText;
+    public TextMeshProUGUI OxygenText;
     private float initialOxygenX;
     private float initialPowerX;
     private float initialOxygenWidth;
@@ -55,13 +62,15 @@ public class Game : MonoBehaviour {
         initialPowerX = PowerBar.anchorMax.x;
         initialOxygenWidth = initialOxygenX - OxygenBar.anchorMin.x;
         initialPowerWidth = initialPowerX - PowerBar.anchorMin.x;
+        WinScreen.SetActive(false);
+        DeathScreen.SetActive(false);
     }
 
     // Update is called once per frame
     void Update() {
         timeSinceHurt += Time.deltaTime;
-        oxygen -= Time.deltaTime * 0.25f;
-        power -= Time.deltaTime * 0.25f;
+        Oxygen -= Time.deltaTime * 0.25f;
+        Power -= Time.deltaTime * 0.25f;
         OxygenBar.anchorMax = new Vector2(initialOxygenX - ((100f - oxygen) / 100f) * initialOxygenWidth, OxygenBar.anchorMax.y);
         PowerBar.anchorMax = new Vector2(initialPowerX - ((100f - power) / 100f) * initialPowerWidth, PowerBar.anchorMax.y);
         if (oxygen <= 0) {
@@ -69,22 +78,24 @@ public class Game : MonoBehaviour {
             c.a += 0.2f * Time.deltaTime;
             FadeOut.color = c;
             if (c.a >= 1.0f) {
+                DeathScreen.SetActive(true);
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
                 SceneManager.LoadScene(0);
             }
         }
-        if (power < 0) {
+        if (power <= 0) {
             // Shut off HUD and light
             HUD.SetActive(false);
             Light.SetActive(false);
         }
         if (Input.GetKeyDown(KeyCode.Escape)) {
-            Menu.SetActive(!Menu.activeSelf);
             if (Menu.activeSelf) {
-                Cursor.lockState = CursorLockMode.None;
+                CloseMenu();
             } else {
-                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.lockState = CursorLockMode.None;
+                Menu.SetActive(true);
+                Time.timeScale = 0f;
             }
         }
     }
@@ -92,5 +103,6 @@ public class Game : MonoBehaviour {
     public void CloseMenu() {
         Menu.SetActive(false);
         Cursor.lockState = CursorLockMode.Locked;
+        Time.timeScale = 1.0f;
     }
 }
