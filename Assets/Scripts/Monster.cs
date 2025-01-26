@@ -12,6 +12,7 @@ public class Monster : MonoBehaviour {
     public bool isZombie = false;
     Animator anim;
     Rigidbody rigid;
+    public GameObject Glitch;
     float damageTimer = 0.0f;
     float soundTimer = 0.0f;
 
@@ -57,6 +58,7 @@ public class Monster : MonoBehaviour {
 
                 Game.Instance.Oxygen -= isZombie ? 25.0f : 5.0f;
                 Game.Instance.timeSinceHurt = 0.0f;
+                Instantiate(Glitch, collision.transform);
             }
         }
     }
