@@ -31,7 +31,7 @@ public class AudioManager : MonoBehaviour {
     }
 
     public void PlayRandomSoundFromList(Vector3 pos, List<AudioClip> clips, float volume, float pitch) {
-        var clip = clips[Random.Range(0, clips.Count - 1)];
+        var clip = clips[Random.Range(0, clips.Count)];
         PlaySound(pos, clip, volume, pitch);
     }
 
