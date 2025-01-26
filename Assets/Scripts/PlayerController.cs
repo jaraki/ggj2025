@@ -45,6 +45,7 @@ public class PlayerController : MonoBehaviour {
         if (Music.Instance != null) {
             StartCoroutine(Music.Instance.FadeOutMusic(Music.Instance.IntroLoop, 3.0f, 0.2f));
         }
+        Camera.main.GetComponent<LerpTowards>().Snap();
 
         rigid = GetComponent<Rigidbody>();
         col = GetComponentInChildren<Collider>();
