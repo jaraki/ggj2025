@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -17,6 +18,15 @@ public class Game : MonoBehaviour {
         set { oxygen = Mathf.Clamp(value, 0, 100); }
     }
 
+    int bubblitisCount;
+    public int BubblitisCount {
+        get { return bubblitisCount; }
+        set { 
+            bubblitisCount = value;
+            BubblitisText.text = $"Bubblitis: {value}";
+        }
+    }
+
     public PlayerController PlayerController;
     public GameObject HUD;
     public GameObject Light;
@@ -24,6 +34,7 @@ public class Game : MonoBehaviour {
     public RectTransform OxygenBar;
     public RectTransform PowerBar;
     public Image FadeOut;
+    public TextMeshProUGUI BubblitisText;
     private float initialOxygenX;
     private float initialPowerX;
     private float initialOxygenWidth;

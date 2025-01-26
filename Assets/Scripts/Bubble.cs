@@ -50,4 +50,11 @@ public class Bubble : MonoBehaviour {
         die = true;
     }
 
+    private void OnTriggerEnter(Collider other) {
+        if (other.gameObject.CompareTag("Bubble")) {
+            Destroy(other.gameObject);
+            Game.Instance.BubblitisCount--;
+        }
+    }
+
 }

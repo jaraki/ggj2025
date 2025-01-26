@@ -8332,6 +8332,57 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d6ae40ad5e39734458d343f8f14578d4, type: 3}
+--- !u!1 &1020666892
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1020666894}
+  - component: {fileID: 1020666893}
+  m_Layer: 0
+  m_Name: BubblitisSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1020666893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1020666892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3b72e0120e4de0468d80cac351fc610, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bubblitisPrefab: {fileID: 241047258473428750, guid: 2bb845b27446f7741a12c9874d0dd369, type: 3}
+  mask:
+    serializedVersion: 2
+    m_Bits: 8
+  count: 100
+  scaleMin: 0.6
+  scaleMax: 1.4
+--- !u!4 &1020666894
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1020666892}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -29.37, y: -1.8, z: 32.38}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1027379037
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12491,6 +12542,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7692014517381687254, guid: 9dd12a7eed22d284c8d621e46e2c8991, type: 3}
   m_PrefabInstance: {fileID: 1548256861}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1548256866 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 356324888430194779, guid: 9dd12a7eed22d284c8d621e46e2c8991, type: 3}
+  m_PrefabInstance: {fileID: 1548256861}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1550787130 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8448045246548428627, guid: d6ae40ad5e39734458d343f8f14578d4, type: 3}
@@ -16127,11 +16189,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerController: {fileID: 1102958832}
   HUD: {fileID: 1548256865}
-  Light: {fileID: 0}
+  Light: {fileID: 5113531098083715420}
   Menu: {fileID: 1548256862}
   OxygenBar: {fileID: 1548256863}
   PowerBar: {fileID: 1548256864}
   FadeOut: {fileID: 1588427629}
+  BubblitisText: {fileID: 1548256866}
 --- !u!4 &2007622891
 Transform:
   m_ObjectHideFlags: 0
@@ -17685,3 +17748,4 @@ SceneRoots:
   - {fileID: 662775603}
   - {fileID: 2007622891}
   - {fileID: 414025261}
+  - {fileID: 1020666894}
