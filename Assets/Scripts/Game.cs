@@ -9,6 +9,12 @@ public class Game : MonoBehaviour
     public GameObject HUD;
     public GameObject Light;
     public GameObject Menu;
+    public RectTransform OxygenBar;
+    public RectTransform PowerBar;
+    private float initialOxygenX;
+    private float initialPowerX;
+    private float initialOxygenWidth;
+    private float initialPowerWidth;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -16,6 +22,10 @@ public class Game : MonoBehaviour
         Oxygen = 100f;
         Instance = this;
         CloseMenu();
+        initialOxygenX = OxygenBar.anchorMax.x;
+        initialPowerX = PowerBar.anchorMax.x;
+        initialOxygenWidth = initialOxygenX - OxygenBar.anchorMin.x;
+        initialPowerWidth = initialPowerX - PowerBar.anchorMin.x;
     }
 
     // Update is called once per frame
@@ -23,7 +33,9 @@ public class Game : MonoBehaviour
     {
         Oxygen -= Time.deltaTime * 0.25f;
         Power -= Time.deltaTime * 0.25f;
-        if(Oxygen < 0 )
+        OxygenBar.anchorMax = new Vector2(initialOxygenX - ((100f - Oxygen) / 100f) * initialOxygenWidth, OxygenBar.anchorMax.y);
+        PowerBar.anchorMax = new Vector2(initialPowerX - ((100f - Power) / 100f) * initialPowerWidth, PowerBar.anchorMax.y);
+        if (Oxygen < 0 )
         {
             // Game Over
 
