@@ -118,6 +118,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   isZombie: 1
+  Glitch: {fileID: 2173705853753938793, guid: 704c754ecb237ba43a09866bc2583ae7, type: 3}
 --- !u!54 &3136661383824463969
 Rigidbody:
   m_ObjectHideFlags: 0
