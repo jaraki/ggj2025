@@ -1015,7 +1015,6 @@ MonoBehaviour:
   BubblitisText: {fileID: 4993360131836884608}
   PowerText: {fileID: 9195422101270233485}
   OxygenText: {fileID: 1948234699109032570}
-  MenuButton: {fileID: 4369352215367698523}
   timeSinceHurt: 100
 --- !u!1 &4790404180002714850
 GameObject:
