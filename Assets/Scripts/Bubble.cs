@@ -3,7 +3,7 @@ using UnityEngine;
 public class Bubble : MonoBehaviour {
 
     Rigidbody rb;
-    Light light;
+    Light bubLight;
     public float maxLifeTime = 5.0f;
     float lifeTime;
     Renderer rend;
@@ -14,7 +14,7 @@ public class Bubble : MonoBehaviour {
     void Start() {
         lifeTime = maxLifeTime;
         rb = GetComponent<Rigidbody>();
-        light = GetComponentInChildren<Light>();
+        bubLight = GetComponentInChildren<Light>();
         rend = GetComponentInChildren<Renderer>();
         ps = GetComponentInChildren<ParticleSystem>();
     }
@@ -26,8 +26,8 @@ public class Bubble : MonoBehaviour {
         }
         rb.AddForce(Vector3.down * 0.5f, ForceMode.Acceleration);
         lifeTime -= Time.deltaTime;
-        if (light) {
-            light.intensity = Mathf.Lerp(0.0f, 1.0f, lifeTime / maxLifeTime);
+        if (bubLight) {
+            bubLight.intensity = Mathf.Lerp(0.0f, 1.0f, lifeTime / maxLifeTime);
         }
         if (lifeTime < 0.0f) {
             Die();

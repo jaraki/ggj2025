@@ -5,16 +5,15 @@ TagManager:
   serializedVersion: 3
   tags:
   - Bubble
-  - Oxygen
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Geo
   - Water
   - UI
   - Bubble
-  - 
+  - Monster
   - 
   - 
   - 
