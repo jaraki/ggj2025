@@ -42,6 +42,8 @@ public class PlayerController : MonoBehaviour {
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start() {
+        StartCoroutine(Music.Instance.FadeOutMusic(Music.Instance.IntroLoop, 3.0f, 0.2f));
+
         rigid = GetComponent<Rigidbody>();
         col = GetComponentInChildren<Collider>();
 
