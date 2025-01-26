@@ -2931,6 +2931,62 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1607418241574369615, guid: 1a69be32deeafa845a1c77bc3076b544, type: 3}
   m_PrefabInstance: {fileID: 339793652}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &343663164
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 343663166}
+  - component: {fileID: 343663165}
+  m_Layer: 0
+  m_Name: Audio Reverb Zone
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!167 &343663165
+AudioReverbZone:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 343663164}
+  m_Enabled: 1
+  m_MinDistance: 1000
+  m_MaxDistance: 1000
+  m_ReverbPreset: 14
+  m_Room: -1000
+  m_RoomHF: -237
+  m_DecayTime: 2.7
+  m_DecayHFRatio: 0.79
+  m_Reflections: -1214
+  m_ReflectionsDelay: 0.013
+  m_Reverb: 395
+  m_ReverbDelay: 0.02
+  m_HFReference: 5000
+  m_Diffusion: 100
+  m_Density: 100
+  m_LFReference: 250
+  m_RoomLF: 0
+--- !u!4 &343663166
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 343663164}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &347171943
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17961,6 +18017,62 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1607418241574369615, guid: 1a69be32deeafa845a1c77bc3076b544, type: 3}
   m_PrefabInstance: {fileID: 2090462848}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2096207641
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2096207643}
+  - component: {fileID: 2096207642}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2096207642
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2096207641}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8185782360f2ef04dbdec223afa7a165, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sources: []
+  zombieSounds:
+  - {fileID: 8300000, guid: 12f0560d646e093469498f118738752a, type: 3}
+  - {fileID: 8300000, guid: 9c67b4aae0a08644caa1779477579dec, type: 3}
+  ratSounds:
+  - {fileID: 8300000, guid: 4273d8fb351d01042ac9b9d6e06ebe54, type: 3}
+  - {fileID: 8300000, guid: 3f045fb34c433a64b82134ea4146d348, type: 3}
+  - {fileID: 8300000, guid: 94017c083747f614fa2b6f61acfa87f3, type: 3}
+  zombieDamage: {fileID: 8300000, guid: 12895cf925cf570479e831747a168c73, type: 3}
+  walking: {fileID: 8300000, guid: 6357672fb747bc44da26919e9597f6bf, type: 3}
+  bubble1: {fileID: 8300000, guid: e4cdd69cc19b8924285b98dc8320364c, type: 3}
+  bubble2: {fileID: 8300000, guid: d8cb89cf1a6cc6b4f863ebbeab971e39, type: 3}
+--- !u!4 &2096207643
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2096207641}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2125724880
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19116,3 +19228,5 @@ SceneRoots:
   - {fileID: 662775603}
   - {fileID: 414025261}
   - {fileID: 1020666894}
+  - {fileID: 343663166}
+  - {fileID: 2096207643}
