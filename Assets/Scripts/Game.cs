@@ -1,4 +1,7 @@
+using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Game : MonoBehaviour {
     public static Game Instance;
@@ -15,16 +18,28 @@ public class Game : MonoBehaviour {
         set { oxygen = Mathf.Clamp(value, 0, 100); }
     }
 
+    int bubblitisCount;
+    public int BubblitisCount {
+        get { return bubblitisCount; }
+        set { 
+            bubblitisCount = value;
+            BubblitisText.text = $"Bubblitis: {value}";
+        }
+    }
+
     public PlayerController PlayerController;
     public GameObject HUD;
     public GameObject Light;
     public GameObject Menu;
     public RectTransform OxygenBar;
     public RectTransform PowerBar;
+    public Image FadeOut;
+    public TextMeshProUGUI BubblitisText;
     private float initialOxygenX;
     private float initialPowerX;
     private float initialOxygenWidth;
     private float initialPowerWidth;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake() {
         power = 100f;
@@ -43,9 +58,15 @@ public class Game : MonoBehaviour {
         power -= Time.deltaTime * 0.25f;
         OxygenBar.anchorMax = new Vector2(initialOxygenX - ((100f - oxygen) / 100f) * initialOxygenWidth, OxygenBar.anchorMax.y);
         PowerBar.anchorMax = new Vector2(initialPowerX - ((100f - power) / 100f) * initialPowerWidth, PowerBar.anchorMax.y);
-        if (oxygen < 0) {
-            // Game Over
-
+        if (oxygen <= 0) {
+            var c = FadeOut.color;
+            c.a += 0.2f * Time.deltaTime;
+            FadeOut.color = c;
+            if(c.a >= 1.0f) {
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+                SceneManager.LoadScene(0);
+            }
         }
         if (power < 0) {
             // Shut off HUD and light

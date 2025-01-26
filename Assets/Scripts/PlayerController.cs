@@ -16,7 +16,9 @@ public class PlayerController : MonoBehaviour {
     float timeSinceJump = 100.0f;
     float timeSinceTryJump = 100.0f;
     float timeSinceGun = 100.0f;
-    public float gunCooldown = 0.1f;
+    float timeSinceLightGun = 100.0f;
+    float bubbleCooldown = 0.1f;
+    float lightBubbleCooldown = 1.0f;
 
     Collider col;
     readonly RaycastHit[] hits = new RaycastHit[16];
@@ -24,11 +26,13 @@ public class PlayerController : MonoBehaviour {
     InputAction moveAction;
     InputAction lookAction;
     InputAction jumpAction;
-    InputAction fireAction;
+    InputAction attackAction;
+    InputAction attack2Action;
 
     float pitch = 0.0f;
 
     public GameObject bubblePrefab;
+    public GameObject lightBubblePrefab;
     public Transform bubbleLaunch;
 
     void Awake() {
@@ -43,7 +47,8 @@ public class PlayerController : MonoBehaviour {
         moveAction = InputSystem.actions.FindAction("Move");
         lookAction = InputSystem.actions.FindAction("Look");
         jumpAction = InputSystem.actions.FindAction("Jump");
-        fireAction = InputSystem.actions.FindAction("Attack");
+        attackAction = InputSystem.actions.FindAction("Attack");
+        attack2Action = InputSystem.actions.FindAction("Attack2");
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -54,6 +59,7 @@ public class PlayerController : MonoBehaviour {
         timeSinceJump += Time.deltaTime;
         timeSinceTryJump += Time.deltaTime;
         timeSinceGun += Time.deltaTime;
+        timeSinceLightGun += Time.deltaTime;
         jumpCooldown -= Time.deltaTime;
 
         Vector2 moveValue = moveAction.ReadValue<Vector2>();
@@ -111,14 +117,25 @@ public class PlayerController : MonoBehaviour {
         rigid.linearVelocity = move;
 
 
-        if (fireAction.IsPressed() && timeSinceGun > gunCooldown) {
+        if (attackAction.IsPressed() && timeSinceGun > bubbleCooldown) {
             timeSinceGun = 0.0f;
             GameObject go = Instantiate(bubblePrefab, bubbleLaunch.position, Quaternion.identity);
             go.GetComponent<Rigidbody>().linearVelocity = bubbleLaunch.forward * 5.0f;
-            go.transform.rotation = Quaternion.Euler(Random.value, Random.value, Random.value);
+            go.transform.rotation = Quaternion.Euler(Random.value * 360.0f, Random.value * 360.0f, Random.value * 360.0f);
             go.transform.localScale = Vector3.one * Random.Range(0.5f, 1.0f);
 
             Game.Instance.Oxygen -= 1.0f;
+        }
+
+        if (attack2Action.IsPressed() && timeSinceLightGun > lightBubbleCooldown) {
+            timeSinceLightGun = 0.0f;
+            GameObject go = Instantiate(lightBubblePrefab, bubbleLaunch.position + bubbleLaunch.forward, Quaternion.identity);
+            go.GetComponent<Rigidbody>().linearVelocity = bubbleLaunch.forward * 3.0f;
+            go.transform.rotation = Quaternion.Euler(Random.value * 360.0f, Random.value * 360.0f, Random.value * 360.0f);
+            go.transform.localScale = Vector3.one * Random.Range(2.5f, 3.0f);
+
+            Game.Instance.Power -= 2.0f;
+            Game.Instance.Oxygen -= 2.0f;
         }
     }
 
