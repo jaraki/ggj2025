@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour {
     PlayerInput input;
     Rigidbody rigid;
     public Transform cam;
+    Animator anim;
     public float lookSensitivity = 0.25f;
 
     public const float MAX_STEEP = 50.0f;
@@ -45,7 +46,8 @@ public class PlayerController : MonoBehaviour {
         if (Music.Instance != null) {
             StartCoroutine(Music.Instance.FadeOutMusic(Music.Instance.IntroLoop, 3.0f, 0.2f));
         }
-        Camera.main.GetComponent<LerpTowards>().Snap();
+        Camera.main.transform.GetComponent<LerpTowards>().Snap();
+        anim = Camera.main.transform.GetComponentInChildren<Animator>();
 
         rigid = GetComponent<Rigidbody>();
         col = GetComponentInChildren<Collider>();
@@ -141,6 +143,8 @@ public class PlayerController : MonoBehaviour {
             AudioManager.Instance.PlaySound(bubbleLaunch.position, AudioManager.Instance.bubble1, 0.3f, Random.Range(0.8f, 1.2f));
 
             Game.Instance.Oxygen -= 1.0f;
+
+            anim.SetTrigger("Fire");
         }
 
         if (attack2Action.IsPressed() && timeSinceLightGun > lightBubbleCooldown) {
@@ -152,8 +156,10 @@ public class PlayerController : MonoBehaviour {
 
             AudioManager.Instance.PlaySound(bubbleLaunch.position, AudioManager.Instance.bubble2, 1.0f, Random.Range(0.8f, 1.2f));
 
-            //Game.Instance.Power -= 2.0f;
-            Game.Instance.Oxygen -= 2.0f;
+            Game.Instance.Power -= 2.0f;
+            Game.Instance.Oxygen -= 1.0f;
+
+            anim.SetTrigger("Fire");
         }
     }
 
