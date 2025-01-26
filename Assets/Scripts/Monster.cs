@@ -8,6 +8,7 @@ public class Monster : MonoBehaviour {
     PlayerController player;
     NavMeshAgent agent;
     public LayerMask targetingMask;
+    float attackTimer = 0.0f;
 
     void Start() {
         var anim = GetComponentInChildren<Animator>();
@@ -31,14 +32,24 @@ public class Monster : MonoBehaviour {
         }
     }
 
+    void OnCollisionStay(Collision collision) {
+        if (collision.collider.CompareTag("Player")) {
+            if (attackTimer < 0.0f) {
+                attackTimer = 2.0f;
+                Game.Instance.Oxygen -= 5.0f;
+            }
+        }
+    }
 
     void Update() {
+        attackTimer -= Time.deltaTime;
         Vector3 start = transform.position + Vector3.up * 0.25f;
         if (Physics.Raycast(start, player.transform.position - start, out RaycastHit info, 10.0f, targetingMask)) {
             if (info.collider.CompareTag("Player")) {
                 agent.destination = player.transform.position;
             }
         }
+
     }
 
 }
