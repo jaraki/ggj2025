@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour {
     float timeSinceLightGun = 100.0f;
     float bubbleCooldown = 0.25f;
     float lightBubbleCooldown = 1.0f;
+    float walkingTimer = 0.5f;
 
     Collider col;
     readonly RaycastHit[] hits = new RaycastHit[16];
@@ -75,6 +76,15 @@ public class PlayerController : MonoBehaviour {
         Vector3 move = transform.forward * moveValue.y + transform.right * moveValue.x;
         move = move.normalized * moveSpeed;
 
+        if (move.magnitude > 0.1f) {
+            walkingTimer -= Time.deltaTime;
+            if (walkingTimer < 0.0f) {
+                AudioManager.Instance.PlaySound(transform.position, AudioManager.Instance.walking, 0.3f, Random.Range(0.5f, 0.8f));
+                walkingTimer = 0.65f;
+            }
+
+        }
+
         float yvel = rigid.linearVelocity.y;
         Vector3 start = transform.position + Vector3.up * 0.25f;
         int count = Physics.SphereCastNonAlloc(start, 0.15f, Vector3.down, hits, 0.2f);
@@ -116,13 +126,14 @@ public class PlayerController : MonoBehaviour {
 
         rigid.linearVelocity = move;
 
-
         if (attackAction.IsPressed() && timeSinceGun > bubbleCooldown) {
             timeSinceGun = 0.0f;
             GameObject go = Instantiate(bubblePrefab, bubbleLaunch.position, Quaternion.identity);
             go.GetComponent<Rigidbody>().linearVelocity = bubbleLaunch.forward * 5.0f;
             go.transform.rotation = Quaternion.Euler(Random.value * 360.0f, Random.value * 360.0f, Random.value * 360.0f);
             go.transform.localScale = Vector3.one * Random.Range(0.5f, 1.0f);
+
+            AudioManager.Instance.PlaySound(bubbleLaunch.position, AudioManager.Instance.bubble1, 0.3f, Random.Range(0.8f, 1.2f));
 
             Game.Instance.Oxygen -= 1.0f;
         }
@@ -133,6 +144,8 @@ public class PlayerController : MonoBehaviour {
             go.GetComponent<Rigidbody>().linearVelocity = bubbleLaunch.forward * 3.0f;
             go.transform.rotation = Quaternion.Euler(Random.value * 360.0f, Random.value * 360.0f, Random.value * 360.0f);
             go.transform.localScale = Vector3.one * Random.Range(2.5f, 3.0f);
+
+            AudioManager.Instance.PlaySound(bubbleLaunch.position, AudioManager.Instance.bubble2, 1.0f, Random.Range(0.8f, 1.2f));
 
             Game.Instance.Power -= 2.0f;
             Game.Instance.Oxygen -= 2.0f;

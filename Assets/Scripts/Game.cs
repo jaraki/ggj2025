@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -66,6 +67,8 @@ public class Game : MonoBehaviour {
         DeathScreen.SetActive(false);
     }
 
+    bool GameOver => oxygen <= 0 || bubblitisCount <= 0;
+
     // Update is called once per frame
     void Update() {
         timeSinceHurt += Time.deltaTime;
@@ -73,12 +76,18 @@ public class Game : MonoBehaviour {
         Power -= Time.deltaTime * 0.25f;
         OxygenBar.anchorMax = new Vector2(initialOxygenX - ((100f - oxygen) / 100f) * initialOxygenWidth, OxygenBar.anchorMax.y);
         PowerBar.anchorMax = new Vector2(initialPowerX - ((100f - power) / 100f) * initialPowerWidth, PowerBar.anchorMax.y);
-        if (oxygen <= 0) {
+        if (GameOver) {
             var c = FadeOut.color;
             c.a += 0.2f * Time.deltaTime;
             FadeOut.color = c;
             if (c.a >= 1.0f) {
-                DeathScreen.SetActive(true);
+                if(oxygen <= 0) 
+                {
+                    DeathScreen.SetActive(true);
+                } else
+                {
+                    WinScreen.SetActive(true);
+                }
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
                 SceneManager.LoadScene(0);
