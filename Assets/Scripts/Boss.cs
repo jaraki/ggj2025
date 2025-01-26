@@ -24,10 +24,12 @@ public class Boss : MonoBehaviour {
 
         var children = GetComponentsInChildren<Transform>();
         foreach (Transform child in children) {
-            var go = Instantiate(bubPrefab, child.position + Random.insideUnitSphere * 2.0f, Random.rotation, null);
-            go.transform.localScale = Vector3.one * Random.Range(0.8f, 1.2f);
-            go.transform.parent = child;
-            healthObjects.Add(go);
+            for (int i = 0; i < 2; ++i) {
+                var go = Instantiate(bubPrefab, child.position + Random.insideUnitSphere * 2.0f, Random.rotation, null);
+                go.transform.localScale = Vector3.one * Random.Range(0.8f, 1.2f);
+                go.transform.parent = child;
+                healthObjects.Add(go);
+            }
         }
         Game.Instance.BubblitisCount += healthObjects.Count;
 
