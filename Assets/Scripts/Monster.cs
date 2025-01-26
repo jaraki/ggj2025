@@ -13,8 +13,10 @@ public class Monster : MonoBehaviour {
     Animator anim;
     Rigidbody rigid;
     float damageTimer = 0.0f;
+    float soundTimer = 0.0f;
 
     void Start() {
+        soundTimer = Random.Range(10.0f, 20.0f);
         rigid = GetComponent<Rigidbody>();
         anim = GetComponentInChildren<Animator>();
         anim.speed = Random.Range(0.9f, 1.1f);
@@ -39,6 +41,7 @@ public class Monster : MonoBehaviour {
                     if (damageTimer < -3.0f) {
                         damageTimer = 3.0f;
                     }
+                    AudioManager.Instance.PlaySound(transform.position + Vector3.up, AudioManager.Instance.zombieDamage, 1.0f, Random.Range(0.5f, 0.6f));
                 }
             }
             if (lastIndex == 0) {
@@ -59,10 +62,11 @@ public class Monster : MonoBehaviour {
     }
 
     void Update() {
+        soundTimer -= Time.deltaTime;
         damageTimer -= Time.deltaTime;
         attackTimer -= Time.deltaTime;
         Vector3 start = transform.position + Vector3.up * 0.25f;
-        if (damageTimer > 0f || 
+        if (damageTimer > 0f ||
             (Physics.Raycast(start, player.transform.position - start, out RaycastHit info, 10.0f, targetingMask) && info.collider.CompareTag("Player"))) {
             agent.destination = player.transform.position;
         }
@@ -72,6 +76,16 @@ public class Monster : MonoBehaviour {
             agent.speed = damageTimer < 0.0f ? 2.5f : 1.5f;
         }
 
-    }
+        if (soundTimer < 0.0f) {
+            if (isZombie) {
+                soundTimer = Random.Range(8.0f, 15.0f);
+                AudioManager.Instance.PlayRandomSoundFromList(transform.position + Vector3.up, AudioManager.Instance.zombieSounds, 1.5f, Random.Range(0.8f, 1.2f));
+            } else {
+                soundTimer = Random.Range(3.0f, 6.0f);
+                AudioManager.Instance.PlayRandomSoundFromList(transform.position, AudioManager.Instance.ratSounds, .65f, Random.Range(0.8f, 1.2f));
+            }
 
+        }
+
+    }
 }
