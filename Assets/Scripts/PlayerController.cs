@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour {
     float timeSinceTryJump = 100.0f;
     float timeSinceGun = 100.0f;
     float timeSinceLightGun = 100.0f;
-    float bubbleCooldown = 0.1f;
+    float bubbleCooldown = 0.25f;
     float lightBubbleCooldown = 1.0f;
 
     Collider col;

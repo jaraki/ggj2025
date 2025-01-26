@@ -31,12 +31,14 @@ public class Monster : MonoBehaviour {
             int lastIndex = healthObjects.Count - 1;
             var last = healthObjects[lastIndex];
             last.SetActive(false);
-            healthObjects.RemoveAt(lastIndex);
-            Game.Instance.BubblitisCount--;
-            if (isZombie) {
-                anim.SetTrigger("damaged");
-                if (damageTimer < -3.0f) {
-                    damageTimer = 3.0f;
+            if (!isZombie || Random.value < 0.25f) {
+                healthObjects.RemoveAt(lastIndex);
+                Game.Instance.BubblitisCount--;
+                if (isZombie) {
+                    anim.SetTrigger("damaged");
+                    if (damageTimer < -3.0f) {
+                        damageTimer = 3.0f;
+                    }
                 }
             }
             if (lastIndex == 0) {
