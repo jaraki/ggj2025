@@ -8,8 +8,10 @@ public class MazeGenerator : MonoBehaviour
     public int Depth;
     public MazeCell Cell;
     public MazeCell[,] Cells;
+    public GameObject OxygenCanisterPrefab;
+    public float PowerupSpawnRate;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    IEnumerator Start()
+    void Start()
     {
         Cells = new MazeCell[Width, Depth];
         for(var x = 0; x < Width; x++)
@@ -19,23 +21,35 @@ public class MazeGenerator : MonoBehaviour
                 Cells[x, z] = Instantiate(Cell, new Vector3(x, 0, z), Quaternion.identity, transform);
             }
         }
-        yield return GenerateMaze(null, Cells[0, 0]);
+        GenerateMaze(null, Cells[0, 0]);
     }
 
-    private IEnumerator GenerateMaze(MazeCell previousCell, MazeCell currentCell)
+    private void GenerateMaze(MazeCell previousCell, MazeCell currentCell)
     {
         currentCell.Visit();
         ClearWalls(previousCell, currentCell);
-        yield return new WaitForSeconds(0.05f);
+        GeneratePowerup(currentCell);
         MazeCell nextCell;
         do
         {
             nextCell = PickNextUnvisitedCell(currentCell);
             if(nextCell != null)
             {
-                yield return GenerateMaze(currentCell, nextCell);
+                GenerateMaze(currentCell, nextCell);
             }
         } while (nextCell != null);
+    }
+
+    private void GeneratePowerup(MazeCell currentCell)
+    {
+        if(currentCell == null)
+        {
+            return;
+        }
+        if(Random.Range(0f,1f) < PowerupSpawnRate)
+        {
+            Instantiate(OxygenCanisterPrefab, new Vector3(currentCell.x, 0, currentCell.z), Quaternion.identity);
+        }
     }
 
     private MazeCell PickNextUnvisitedCell(MazeCell cell)
