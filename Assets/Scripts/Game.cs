@@ -51,6 +51,7 @@ public class Game : MonoBehaviour {
     private float initialOxygenWidth;
     private float initialPowerWidth;
     public float timeSinceHurt = 100.0f;
+    public int Won = 0;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake() {
@@ -82,14 +83,17 @@ public class Game : MonoBehaviour {
             if (c.a >= 1.0f) {
                 if(oxygen <= 0) 
                 {
+                    Won = -1;
                     DeathScreen.SetActive(true);
                 } else
                 {
+                    Won = 1;
                     WinScreen.SetActive(true);
                 }
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
-                SceneManager.LoadScene(0);
+                
+                SceneManager.LoadScene("GameOver");
             }
         } else {
             var c = FadeOut.color;
