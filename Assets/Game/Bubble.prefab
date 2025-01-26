@@ -12,10 +12,9 @@ GameObject:
   - component: {fileID: 6168360639904582701}
   - component: {fileID: 646888762700678428}
   - component: {fileID: 4705815072797992148}
-  - component: {fileID: 5143252631396953360}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Bubble
-  m_TagString: Untagged
+  m_TagString: Bubble
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -98,19 +97,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxLifeTime: 5
---- !u!114 &5143252631396953360
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3270241487198350697}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b17ec8ea8687194a900b03a7dc7229c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxLifeTime: 5
 --- !u!1 &5767567267896400271
 GameObject:
   m_ObjectHideFlags: 0
@@ -122,7 +108,7 @@ GameObject:
   - component: {fileID: 5468684423502111799}
   - component: {fileID: 5160636861460857983}
   - component: {fileID: 8142301981854300471}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -208,7 +194,7 @@ GameObject:
   - component: {fileID: 7658043745823221298}
   - component: {fileID: 352465138139256789}
   - component: {fileID: 2797959993983449940}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BubblePop
   m_TagString: Untagged
   m_Icon: {fileID: 0}

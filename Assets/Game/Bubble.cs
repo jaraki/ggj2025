@@ -30,10 +30,17 @@ public class Bubble : MonoBehaviour {
             light.intensity = Mathf.Lerp(0.0f, 1.0f, lifeTime / maxLifeTime);
         }
         if (lifeTime < 0.0f) {
-            Destroy(gameObject, 1.0f);
-            ps.Play();
-            rend.enabled = false;
-            die = true;
+            Die();
         }
+    }
+
+    public void Die() {
+        if (die) {
+            return;
+        }
+        Destroy(gameObject, 1.0f);
+        ps.Play();
+        rend.enabled = false;
+        die = true;
     }
 }
