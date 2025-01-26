@@ -10,7 +10,7 @@ public class Game : MonoBehaviour {
     public float Power {
         get { return power; }
         set { power = Mathf.Clamp(value, 0, 100);
-            PowerText.text = $"{(int)value}%";
+            PowerText.text = $"{(int)power}%";
         }
     }
 
@@ -20,7 +20,7 @@ public class Game : MonoBehaviour {
         set {
             if (timeSinceHurt > 2.0f) {
                 oxygen = Mathf.Clamp(value, 0, 100);
-                OxygenText.text = $"Oxygen Level: {(int)value}%";
+                OxygenText.text = $"Oxygen Level: {(int)oxygen}%";
             }
         }
     }
