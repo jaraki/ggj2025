@@ -83,6 +83,10 @@ public class Game : MonoBehaviour {
                 Cursor.visible = true;
                 SceneManager.LoadScene(0);
             }
+        } else {
+            var c = FadeOut.color;
+            c.a = 0.0f;
+            FadeOut.color = c;
         }
         if (power <= 0) {
             // Shut off HUD and light
