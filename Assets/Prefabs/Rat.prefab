@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1149877612811498927}
   - component: {fileID: 4529930920058446863}
   - component: {fileID: 8433861238650354655}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: badBubble (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 1519666376931378883}
   - component: {fileID: 6567531875214000796}
   - component: {fileID: 1990546977419589059}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: badBubble
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -183,7 +183,7 @@ GameObject:
   - component: {fileID: 6570431578405537148}
   - component: {fileID: 1340713244326139934}
   - component: {fileID: 891206848045724666}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: badBubble (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -269,7 +269,8 @@ GameObject:
   - component: {fileID: 4351585575059005437}
   - component: {fileID: 1199831710890895683}
   - component: {fileID: 1509034083172415707}
-  m_Layer: 0
+  - component: {fileID: 369434451355618758}
+  m_Layer: 7
   m_Name: Rat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -310,6 +311,9 @@ MonoBehaviour:
   - {fileID: 1379059616604277652}
   - {fileID: 1886441606485303142}
   - {fileID: 2758996402781551099}
+  targetingMask:
+    serializedVersion: 2
+    m_Bits: 1
 --- !u!54 &1509034083172415707
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -333,10 +337,32 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
+--- !u!195 &369434451355618758
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4226984139214880776}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.3
+  m_Speed: 3
+  m_Acceleration: 16
+  avoidancePriority: 50
+  m_AngularSpeed: 360
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 0.5
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &5367808668188804621
 GameObject:
   m_ObjectHideFlags: 0
@@ -347,7 +373,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4003706781425165818}
   - component: {fileID: 5563325185082334953}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -403,7 +429,7 @@ GameObject:
   - component: {fileID: 8470776355471186249}
   - component: {fileID: 7899311035543438465}
   - component: {fileID: 6311838088804713959}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: badBubble (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -542,9 +568,49 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 744c1c1be95c1cb48b7797a80303e5aa, type: 2}
+    - target: {fileID: -4965132126584426026, guid: c4e3a13060e3bba459406c805def8821, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: -4891989944007551426, guid: c4e3a13060e3bba459406c805def8821, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: -2977523114006053726, guid: c4e3a13060e3bba459406c805def8821, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: c4e3a13060e3bba459406c805def8821, type: 3}
       propertyPath: m_Name
       value: rat_animated_v2
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c4e3a13060e3bba459406c805def8821, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3285105636958490293, guid: c4e3a13060e3bba459406c805def8821, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4011716567348685667, guid: c4e3a13060e3bba459406c805def8821, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5458850461446221964, guid: c4e3a13060e3bba459406c805def8821, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5744354427273087177, guid: c4e3a13060e3bba459406c805def8821, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6352741825440629684, guid: c4e3a13060e3bba459406c805def8821, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8304156485610243824, guid: c4e3a13060e3bba459406c805def8821, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

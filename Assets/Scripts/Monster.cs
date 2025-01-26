@@ -1,12 +1,19 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Monster : MonoBehaviour {
 
     public List<GameObject> healthObjects = new List<GameObject>();
+    PlayerController player;
+    NavMeshAgent agent;
+    public LayerMask targetingMask;
 
     void Start() {
-
+        var anim = GetComponentInChildren<Animator>();
+        anim.speed = Random.Range(0.9f, 1.1f);
+        player = GameObject.Find("Player").GetComponent<PlayerController>();
+        agent = GetComponent<NavMeshAgent>();
     }
 
     private void OnCollisionEnter(Collision collision) {
@@ -20,6 +27,16 @@ public class Monster : MonoBehaviour {
             healthObjects.RemoveAt(lastIndex);
             if (lastIndex == 0) {
                 Destroy(gameObject);
+            }
+        }
+    }
+
+
+    void Update() {
+        Vector3 start = transform.position + Vector3.up * 0.25f;
+        if (Physics.Raycast(start, player.transform.position - start, out RaycastHit info, 10.0f, targetingMask)) {
+            if (info.collider.CompareTag("Player")) {
+                agent.destination = player.transform.position;
             }
         }
     }

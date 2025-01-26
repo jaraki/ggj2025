@@ -117,6 +117,8 @@ public class PlayerController : MonoBehaviour {
             go.GetComponent<Rigidbody>().linearVelocity = bubbleLaunch.forward * 5.0f;
             go.transform.rotation = Quaternion.Euler(Random.value, Random.value, Random.value);
             go.transform.localScale = Vector3.one * Random.Range(0.5f, 1.0f);
+
+            Game.Instance.Oxygen -= 1.0f;
         }
     }
 
