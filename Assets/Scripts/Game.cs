@@ -15,13 +15,17 @@ public class Game : MonoBehaviour {
     float oxygen;
     public float Oxygen {
         get { return oxygen; }
-        set { oxygen = Mathf.Clamp(value, 0, 100); }
+        set {
+            if (timeSinceHurt > 2.0f) {
+                oxygen = Mathf.Clamp(value, 0, 100);
+            }
+        }
     }
 
     int bubblitisCount;
     public int BubblitisCount {
         get { return bubblitisCount; }
-        set { 
+        set {
             bubblitisCount = value;
             BubblitisText.text = $"Bubblitis: {value}";
         }
@@ -39,6 +43,7 @@ public class Game : MonoBehaviour {
     private float initialPowerX;
     private float initialOxygenWidth;
     private float initialPowerWidth;
+    public float timeSinceHurt = 100.0f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake() {
@@ -54,6 +59,7 @@ public class Game : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
+        timeSinceHurt += Time.deltaTime;
         oxygen -= Time.deltaTime * 0.25f;
         power -= Time.deltaTime * 0.25f;
         OxygenBar.anchorMax = new Vector2(initialOxygenX - ((100f - oxygen) / 100f) * initialOxygenWidth, OxygenBar.anchorMax.y);
@@ -62,7 +68,7 @@ public class Game : MonoBehaviour {
             var c = FadeOut.color;
             c.a += 0.2f * Time.deltaTime;
             FadeOut.color = c;
-            if(c.a >= 1.0f) {
+            if (c.a >= 1.0f) {
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
                 SceneManager.LoadScene(0);

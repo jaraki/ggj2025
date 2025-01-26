@@ -102,8 +102,8 @@ ModelImporter:
       name: stun
       takeName: Take 001
       internalID: 3060872287085348379
-      firstFrame: 219
-      lastFrame: 271
+      firstFrame: 230
+      lastFrame: 260
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
