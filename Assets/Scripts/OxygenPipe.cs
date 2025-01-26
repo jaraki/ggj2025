@@ -5,7 +5,7 @@ public class OxygenPipe : MonoBehaviour {
     float timer = 0.0f;
 
     private void OnTriggerStay(Collider other) {
-        if (other.CompareTag("Player")) {
+        if (other.CompareTag("Player") && Game.Instance.timeSinceHurt > 2.0f) {
             Game.Instance.Oxygen += Time.deltaTime * 25.0f;
             timer -= Time.deltaTime;
             if (timer < 0.0f && Game.Instance.Oxygen < 99.0f) {

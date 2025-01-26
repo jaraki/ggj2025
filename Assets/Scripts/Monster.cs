@@ -12,7 +12,6 @@ public class Monster : MonoBehaviour {
     public bool isZombie = false;
     Animator anim;
     Rigidbody rigid;
-    public GameObject Glitch;
     float damageTimer = 0.0f;
     float soundTimer = 0.0f;
 
@@ -56,10 +55,8 @@ public class Monster : MonoBehaviour {
             if (attackTimer < 0.0f) {
                 attackTimer = 2.0f;
 
-                Game.Instance.Oxygen -= isZombie ? 25.0f : 5.0f;
-                Game.Instance.timeSinceHurt = 0.0f;
-                Instantiate(Glitch, collision.transform);
-                AudioManager.Instance.PlaySound(collision.transform.position, AudioManager.Instance.playerHurt, 0.3f, Random.Range(0.9f, 1.1f));
+                var player = collision.transform.GetComponent<PlayerController>();
+                player.Hurt(isZombie ? 25.0f : 5.0f);
             }
         }
     }

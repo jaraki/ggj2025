@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour {
     public Transform cam;
     Animator anim;
     public float lookSensitivity = 0.25f;
+    public GameObject Glitch;
 
     public const float MAX_STEEP = 50.0f;
     public const float TRY_JUMP_LENIENCE = 0.2f;
@@ -69,6 +70,7 @@ public class PlayerController : MonoBehaviour {
         timeSinceGun += Time.deltaTime;
         timeSinceLightGun += Time.deltaTime;
         jumpCooldown -= Time.deltaTime;
+        bubblitisHurtTimer += Time.deltaTime;
 
         Vector2 moveValue = moveAction.ReadValue<Vector2>();
         Vector2 lookValue = lookAction.ReadValue<Vector2>() * lookSensitivity;
@@ -171,4 +173,20 @@ public class PlayerController : MonoBehaviour {
             Cursor.visible = true;
         }
     }
+
+    float bubblitisHurtTimer = 0.0f;
+    private void OnTriggerStay(Collider other) {
+        if (other.gameObject.CompareTag("Bubble") && bubblitisHurtTimer > 0.5f) { // its bubblitis bro
+            bubblitisHurtTimer = 0.0f;
+            Hurt(5.0f);
+        }
+    }
+
+    public void Hurt(float damage) {
+        Game.Instance.timeSinceHurt = 0.0f;
+        Game.Instance.Oxygen -= damage;
+        Instantiate(Glitch, transform);
+        AudioManager.Instance.PlaySound(transform.position, AudioManager.Instance.playerHurt, 0.3f, Random.Range(0.9f, 1.1f));
+    }
+
 }
