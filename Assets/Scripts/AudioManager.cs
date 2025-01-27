@@ -18,6 +18,8 @@ public class AudioManager : MonoBehaviour {
 
     public AudioClip playerHurt;
 
+    public AudioClip sprintSound;
+
     void Awake() {
         Instance = this;
         for (int i = 0; i < 32; ++i) {

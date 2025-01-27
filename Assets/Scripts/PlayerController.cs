@@ -12,8 +12,8 @@ public class PlayerController : MonoBehaviour {
 
     public const float MAX_STEEP = 50.0f;
     public const float TRY_JUMP_LENIENCE = 0.2f;
-    public float moveSpeed = 3.0f;
-    public float jumpSpeed = 5.0f;
+    float moveSpeed = 3.0f;
+    float jumpSpeed = 5.0f;
     float jumpCooldown = 0.0f;
     float timeSinceJump = 100.0f;
     float timeSinceTryJump = 100.0f;
@@ -27,6 +27,7 @@ public class PlayerController : MonoBehaviour {
     readonly RaycastHit[] hits = new RaycastHit[16];
 
     InputAction moveAction;
+    InputAction sprintAction;
     InputAction lookAction;
     InputAction jumpAction;
     InputAction attackAction;
@@ -54,6 +55,7 @@ public class PlayerController : MonoBehaviour {
         col = GetComponentInChildren<Collider>();
 
         moveAction = InputSystem.actions.FindAction("Move");
+        sprintAction = InputSystem.actions.FindAction("Sprint");
         lookAction = InputSystem.actions.FindAction("Look");
         jumpAction = InputSystem.actions.FindAction("Jump");
         attackAction = InputSystem.actions.FindAction("Attack");
@@ -63,8 +65,11 @@ public class PlayerController : MonoBehaviour {
         Cursor.visible = false;
     }
 
+    float sprintTimer = 0.0f;
+
     // Update is called once per frame
     void Update() {
+        sprintTimer -= Time.deltaTime;
         timeSinceJump += Time.deltaTime;
         timeSinceTryJump += Time.deltaTime;
         timeSinceGun += Time.deltaTime;
@@ -91,8 +96,15 @@ public class PlayerController : MonoBehaviour {
                 AudioManager.Instance.PlaySound(transform.position, AudioManager.Instance.walking, 0.3f, Random.Range(0.5f, 0.8f));
                 walkingTimer = 0.65f;
             }
-
         }
+
+        Game.Instance.sprinting = sprintAction.IsPressed();
+        moveSpeed = Game.Instance.sprinting ? 5.0f : 3.0f;
+        if (sprintTimer < 0.0f && Game.Instance.sprinting) {
+            sprintTimer = 2.5f;
+            AudioManager.Instance.PlaySound(transform.position, AudioManager.Instance.sprintSound, 0.2f, Random.Range(0.8f, 1.2f));
+        }
+        
 
         float yvel = rigid.linearVelocity.y;
         Vector3 start = transform.position + Vector3.up * 0.25f;
@@ -152,7 +164,7 @@ public class PlayerController : MonoBehaviour {
         if (attack2Action.IsPressed() && timeSinceLightGun > lightBubbleCooldown) {
             timeSinceLightGun = 0.0f;
             GameObject go = Instantiate(lightBubblePrefab, bubbleLaunch.position + bubbleLaunch.forward, Quaternion.identity);
-            go.GetComponent<Rigidbody>().linearVelocity = bubbleLaunch.forward * 3.0f;
+            go.GetComponent<Rigidbody>().linearVelocity = bubbleLaunch.forward * 5.0f;
             go.transform.rotation = Quaternion.Euler(Random.value * 360.0f, Random.value * 360.0f, Random.value * 360.0f);
             go.transform.localScale = Vector3.one * Random.Range(2.5f, 3.0f);
 

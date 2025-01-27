@@ -51,6 +51,7 @@ public class Game : MonoBehaviour {
     private float initialOxygenWidth;
     private float initialPowerWidth;
     public float timeSinceHurt = 100.0f;
+    public bool sprinting = false;
     public int Won = 0;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -72,7 +73,7 @@ public class Game : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         timeSinceHurt += Time.deltaTime;
-        Oxygen -= Time.deltaTime * 0.25f;
+        Oxygen -= Time.deltaTime * (sprinting ? 2.0f : 0.25f);
         Power -= Time.deltaTime * 0.25f;
         OxygenBar.anchorMax = new Vector2(initialOxygenX - ((100f - oxygen) / 100f) * initialOxygenWidth, OxygenBar.anchorMax.y);
         PowerBar.anchorMax = new Vector2(initialPowerX - ((100f - power) / 100f) * initialPowerWidth, PowerBar.anchorMax.y);

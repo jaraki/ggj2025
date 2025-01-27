@@ -57,3 +57,4 @@ MonoBehaviour:
   bubble1: {fileID: 8300000, guid: e4cdd69cc19b8924285b98dc8320364c, type: 3}
   bubble2: {fileID: 8300000, guid: d8cb89cf1a6cc6b4f863ebbeab971e39, type: 3}
   playerHurt: {fileID: 8300000, guid: 5e8c2c040dc3d1748b509fffe120ea17, type: 3}
+  sprintSound: {fileID: 8300000, guid: 05ac0f6fd6b6fe54bb33c84c403cf3e5, type: 3}
