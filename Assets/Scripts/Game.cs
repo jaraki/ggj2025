@@ -101,10 +101,13 @@ public class Game : MonoBehaviour {
             c.a = 0.0f;
             FadeOut.color = c;
         }
-        if (power <= 0) {
-            // Shut off HUD and light
-            HUD.SetActive(false);
-            Light.SetActive(false);
+        // Shut off HUD and light if power is 0
+        HUD.SetActive(power > 0);
+        Light.SetActive(power > 0);
+        if(power <= 20)
+        {
+            HUD.SetActive(Random.value < 0.33f);
+            Light.SetActive(Random.value < 0.33f);
         }
         if (Input.GetKeyDown(KeyCode.Escape)) {
             if (Menu.activeSelf) {

@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73fbd14e7d4d3d84b9d24cd951e46832, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ReplenishAmount: 20
+  ReplenishAmount: 25
   Type: 1
 --- !u!136 &2070713416963423122
 CapsuleCollider:
