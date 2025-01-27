@@ -53,6 +53,7 @@ public class Game : MonoBehaviour {
     public float timeSinceHurt = 100.0f;
     public bool sprinting = false;
     public int Won = 0;
+    public float timeSinceReload = 100.0f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake() {
@@ -72,6 +73,7 @@ public class Game : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
+        timeSinceReload += Time.deltaTime;
         timeSinceHurt += Time.deltaTime;
         Oxygen -= Time.deltaTime * (sprinting ? 2.0f : 0.25f);
         Power -= Time.deltaTime * 0.25f;

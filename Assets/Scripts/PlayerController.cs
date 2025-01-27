@@ -61,14 +61,17 @@ public class PlayerController : MonoBehaviour {
         attackAction = InputSystem.actions.FindAction("Attack");
         attack2Action = InputSystem.actions.FindAction("Attack2");
 
+
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
 
     float sprintTimer = 0.0f;
+    float reloadTimer = 0.0f;
 
     // Update is called once per frame
     void Update() {
+        reloadTimer -= Time.deltaTime;
         sprintTimer -= Time.deltaTime;
         timeSinceJump += Time.deltaTime;
         timeSinceTryJump += Time.deltaTime;
@@ -104,7 +107,11 @@ public class PlayerController : MonoBehaviour {
             sprintTimer = 2.5f;
             AudioManager.Instance.PlaySound(transform.position, AudioManager.Instance.sprintSound, 0.2f, Random.Range(0.8f, 1.2f));
         }
-        
+
+        if (Game.Instance.timeSinceReload < 0.1f && reloadTimer < 0.0f) {
+            anim.SetTrigger("Reload");
+            reloadTimer = 4.0f;
+        }
 
         float yvel = rigid.linearVelocity.y;
         Vector3 start = transform.position + Vector3.up * 0.25f;
@@ -147,33 +154,35 @@ public class PlayerController : MonoBehaviour {
 
         rigid.linearVelocity = move;
 
-        if (attackAction.IsPressed() && timeSinceGun > bubbleCooldown) {
-            timeSinceGun = 0.0f;
-            GameObject go = Instantiate(bubblePrefab, bubbleLaunch.position, Quaternion.identity);
-            go.GetComponent<Rigidbody>().linearVelocity = bubbleLaunch.forward * 5.0f;
-            go.transform.rotation = Quaternion.Euler(Random.value * 360.0f, Random.value * 360.0f, Random.value * 360.0f);
-            go.transform.localScale = Vector3.one * Random.Range(0.5f, 1.0f);
+        if (Game.Instance.timeSinceReload > 0.2f) {
+            if (attackAction.IsPressed() && timeSinceGun > bubbleCooldown) {
+                timeSinceGun = 0.0f;
+                GameObject go = Instantiate(bubblePrefab, bubbleLaunch.position, Quaternion.identity);
+                go.GetComponent<Rigidbody>().linearVelocity = bubbleLaunch.forward * 5.0f;
+                go.transform.rotation = Quaternion.Euler(Random.value * 360.0f, Random.value * 360.0f, Random.value * 360.0f);
+                go.transform.localScale = Vector3.one * Random.Range(0.5f, 1.0f);
 
-            AudioManager.Instance.PlaySound(bubbleLaunch.position, AudioManager.Instance.bubble1, 0.3f, Random.Range(0.8f, 1.2f));
+                AudioManager.Instance.PlaySound(bubbleLaunch.position, AudioManager.Instance.bubble1, 0.3f, Random.Range(0.8f, 1.2f));
 
-            Game.Instance.Oxygen -= 1.0f;
+                Game.Instance.Oxygen -= 1.0f;
 
-            anim.SetTrigger("Fire");
-        }
+                anim.SetTrigger("Fire");
+            }
 
-        if (attack2Action.IsPressed() && timeSinceLightGun > lightBubbleCooldown) {
-            timeSinceLightGun = 0.0f;
-            GameObject go = Instantiate(lightBubblePrefab, bubbleLaunch.position + bubbleLaunch.forward, Quaternion.identity);
-            go.GetComponent<Rigidbody>().linearVelocity = bubbleLaunch.forward * 5.0f;
-            go.transform.rotation = Quaternion.Euler(Random.value * 360.0f, Random.value * 360.0f, Random.value * 360.0f);
-            go.transform.localScale = Vector3.one * Random.Range(2.5f, 3.0f);
+            if (attack2Action.IsPressed() && timeSinceLightGun > lightBubbleCooldown) {
+                timeSinceLightGun = 0.0f;
+                GameObject go = Instantiate(lightBubblePrefab, bubbleLaunch.position + bubbleLaunch.forward, Quaternion.identity);
+                go.GetComponent<Rigidbody>().linearVelocity = bubbleLaunch.forward * 5.0f;
+                go.transform.rotation = Quaternion.Euler(Random.value * 360.0f, Random.value * 360.0f, Random.value * 360.0f);
+                go.transform.localScale = Vector3.one * Random.Range(2.5f, 3.0f);
 
-            AudioManager.Instance.PlaySound(bubbleLaunch.position, AudioManager.Instance.bubble2, 1.0f, Random.Range(0.8f, 1.2f));
+                AudioManager.Instance.PlaySound(bubbleLaunch.position, AudioManager.Instance.bubble2, 1.0f, Random.Range(0.8f, 1.2f));
 
-            Game.Instance.Power -= 2.0f;
-            Game.Instance.Oxygen -= 1.0f;
+                Game.Instance.Power -= 2.0f;
+                Game.Instance.Oxygen -= 1.0f;
 
-            anim.SetTrigger("Fire");
+                anim.SetTrigger("Fire");
+            }
         }
     }
 
